@@ -245,9 +245,12 @@ void TrojanMap::PrintMenu() {
         "* 6. Topological Sort                                         \n"
         "**************************************************************\n";
     // Read location names from CSV file
+    // TODO: This should be in a separate function that takes 
+    // the filename from the user and returns the vector. 
+    // The students should write this function
     std::vector<std::string> location_names_from_csv;
     std::fstream fin;
-    fin.open("src/lib/topologicalsort_locations.csv", std::ios::in);
+    fin.open("input/topologicalsort_locations.csv", std::ios::in);
     std::string line, word;
     getline(fin, line);
     while (getline(fin, line)) {
@@ -259,8 +262,11 @@ void TrojanMap::PrintMenu() {
     fin.close();
 
     // Read dependencies from CSV file
+    // TODO: This should be in a separate function that takes 
+    // the filename from the user and returns the vector.
+    // The students should write this function
     std::vector<std::vector<std::string>> dependencies_from_csv;
-    fin.open("src/lib/topologicalsort_dependencies.csv", std::ios::in);
+    fin.open("input/topologicalsort_dependencies.csv", std::ios::in);
     getline(fin, line);
     while (getline(fin, line)) {
       std::stringstream s(line);

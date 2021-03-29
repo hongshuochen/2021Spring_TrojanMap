@@ -63,6 +63,7 @@ class UI {
     }
   }
 
+  // TODO: This function should be written by students.
   void ScrollText(std::string_view text, int intervalMilliSeconds = 10,
                   int y = 0) {
     int window_x, window_y;
