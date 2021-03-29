@@ -363,7 +363,7 @@ std::vector<std::string> DeliveringTrojan(std::vector<std::string> &location_nam
 
 Tommy Trojan got a part-time job from UberEats, for which he needs to pick up and deliver food from local 
 restaurants to various location near campus. It means Tommy needs to visit a few different location near campus with certain order, since there are some constraints about the Tommy's route planning. For example, he must first get the food from restaurant and then deliver it. Also, the UberEats app will have some instructions about the priority
-for different orders. So, he asks you to help him figure out the feasible route.
+for different orders. So, he asks you to help him figure out whether there exists a feasible route. 
 
 Here we will give a vector of location names that Tommy needs to visit, and also some dependencies between those locations.
 For example, 
@@ -377,7 +377,9 @@ that Tommy must go to Cardinal Gardens prior to Coffee Bean1.
 
 Output: 
 ```Cardinal Gardens -> Coffee Bean1 -> CVS```
-Also, we provide ```PlotPointsOrder```function that could show the results on map. It will plot each location name and also some arrowed lines to demonstrate a feasible route.
+Also, we provide ```PlotPointsOrder```function that could show the results on map. It will plot each location name and also some arrowed lines to demonstrate a feasible route. If there are no feasible route, just return one empty vector.
+
+Hint: The locations are nodes, and the dependencies could be directed edge. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
 
 ```shell
 6
