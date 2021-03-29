@@ -1,13 +1,14 @@
-# EE599 Final Project - TrojanMap
+# EE599 Final Project - Spring 2021 - TrojanMap
 
 ## TrojanMap
 
-> This project focuses on using data structures and graph search algorithms to build a map application.
+This project focuses on using data structures in C++ and implementing various graph algorithms to build a map application.
+
 <p align="center"><img src="img/TrojanMap.png" alt="Trojan" width="500" /></p>
 
 - Please clone the repository, look through [README.md](README.md) and fill up functions to finish in the project.
 - Please make sure that your code can run `bazel run/test`.
-- In this project, you will need to fill up [trojanmap.cc](src/lib/trojanmap.cc) and add unit tests in tests.
+- In this project, you will need to fill up [trojanmap.cc](src/lib/trojanmap.cc) and add unit tests in the `tests` directory.
 
 ---
 
@@ -45,14 +46,16 @@ $ cd opencv/
 $ mkdir build install
 ```
 
-For Ubuntu,
+### Other library Installations
+
+For Ubuntu:
 ```shell
 $ sudo apt-get install cmake libgtk2.0-dev pkg-config
 $ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 $ sudo apt-get install libncurses5-dev libncursesw5-dev
 ```
 
-For MacOS,
+For MacOS:
 ```shell
 $ brew install cmake
 $ brew install ncurses
@@ -123,7 +126,7 @@ Please select 1 - 7:
 
 ## Test the program
 
-We create some tests for you to test your program, please run
+We created some tests for you to test your program, please run
 ```shell
 $ bazel test tests:trojanmap_test
 ```
@@ -172,7 +175,7 @@ Time taken by function: 1904 microseconds
 std::pair<double, double> GetPosition(std::string name);
 ```
 
-Given a location name, return the latitude and longitude. There is no duplicate location name. Mark the locations on the map. If the location does not exists, return (-1, -1).
+Given a location name, return the latitude and longitude. There are no duplicated location names. You should mark the given locations on the map. If the location does not exist, return (-1, -1).
 
 Example:
 
@@ -203,10 +206,10 @@ Time taken by function: 1215 microseconds
 ## Step 3: CalculateShortestPath between two places
 
 ```c++
-std::vector<std::string> CalculateShortestPath_Dijkstra(std::string location1_name,
-                                               std::string location2_name);
-std::vector<std::string> CalculateShortestPath_Bellman_Ford(std::string location1_name,
-                                               std::string location2_name);
+std::vector<std::string> CalculateShortestPath_Dijkstra(std::string &location1_name,
+                                               std::string &location2_name);
+std::vector<std::string> CalculateShortestPath_Bellman_Ford(std::string &location1_name,
+                                               std::string &location2_name);
 ```
 
 Given 2 locations A and B, find the best route from A to B. The distance between 2 points is the euclidean distance using latitude and longitude. You should use both Dijkstra algorithm and Bellman-Ford algorithm. Compare the time for the different methods. Show the routes on the map. If there is no path, please return empty vector.
@@ -244,11 +247,13 @@ Time taken by function: 45149 microseconds
 
 <p align="center"><img src="img/Routing.png" alt="Routing" width="500"/></p>
 
-## Step 4: The Travelling Trojan Problem (AKA Traveling salesman!)
+## Step 4: The Travelling Trojan Problem (AKA Traveling Salesman!)
 
 In this section, we assume that a complete graph is given to you. That means each node is a neighbor of all other nodes.
-Given a vector of location ids, assume every location can reach every location in the list (Complete graph. Do not care the neighbors).
-Find the shortest route that covers all the locations and goes back to the start point. You will need to return the progress to get the shortest route which will be converted to a animation.  
+Given a vector of location ids, assume every location can reach all other locations in the vector (i.e. assume that the vector of location ids is a complete graph).
+Find the shortest route that covers all the locations exactly once and goes back to the start point. 
+
+You will need to return the progress to get the shortest route which will then be converted to an animation.  
 
 We will use the following algorithms:
 
@@ -263,7 +268,7 @@ std::pair<double, std::vector<std::vector<std::string>>> TravellingTrojan_2opt(
       std::vector<std::string> &location_ids);
 ```
 
-Please report and compare the time spent by these 2 algorithms. 2-opt algorithm may not get the optimal solution. Please show how far you solution to the optimal solution.
+Please report and compare the time spent by these 2 algorithms. 2-opt algorithm may not get the optimal solution. Please show how far your solution is from the optimal solution.
 
 Show the routes on the map. For each intermediate solution, create a new plot. Your final video presentation should include the changes to your solution.
 
@@ -296,21 +301,23 @@ Time taken by function: 152517394 microseconds
 bool CycleDetection(std::vector<double> &square);
 ```
 
-In this section, we use a square-shaped subgraph of the original graph by using four coordinates stored in ```std::vector<double> square```, which followed the order of left/right/upper/lower bound. Then try to determine if there is a cycle path or not. If it does, return true and report that path on map, false otherwise.
+In this section, we use a square-shaped subgraph of the original graph by using four coordinates stored in ```std::vector<double> square```, which follows the order of left, right, upper, and lower bounds. 
 
-Input: \
-square = {-118.299, -118.264, 34.032, 34.011} \
+Then try to determine if there is a cycle path in the that subgraph. If it does, return true and report that path on the map. Otherwise return false.
 
+Example 1:
+```shell
+Input: square = {-118.299, -118.264, 34.032, 34.011}
 Output: true
-
+```
 Here we use the whole original graph as our subgraph. 
 <p align="center"><img src="img/cycle1.png" alt="TSP" width="500"/></p>
 
-Input: \
-square = {-118.290919, -118.282911, 34.02235, 34.019675} \
-
+Example 2:
+```shell
+Input: square = {-118.290919, -118.282911, 34.02235, 34.019675}
 Output: false
-
+```
 Here we use a square area inside USC campus as our subgraph
 <p align="center"><img src="img/cycle2.png" alt="TSP" width="500"/></p>
 
@@ -361,23 +368,28 @@ std::vector<std::string> DeliveringTrojan(std::vector<std::string> &location_nam
                                             std::vector<std::vector<std::string>> &dependencies);
 ```
 
-Tommy Trojan got a part-time job from UberEats, for which he needs to pick up and deliver food from local 
-restaurants to various location near campus. It means Tommy needs to visit a few different location near campus with certain order, since there are some constraints about the Tommy's route planning. For example, he must first get the food from restaurant and then deliver it. Also, the UberEats app will have some instructions about the priority
-for different orders. So, he asks you to help him figure out the feasible route.
+Tommy Trojan got a part-time job from TrojanEats, for which he needs to pick up and deliver food from local restaurants to various location near the campus. Tommy needs to visit a few different location near the campus with certain order, since there are some constraints. For example, he must first get the food from the restaurant before arriving at the delivery point. 
 
-Here we will give a vector of location names that Tommy needs to visit, and also some dependencies between those locations.
+The TrojanEats app will have some instructions about these constraints. So, Tommy asks you to help him figure out the feasible route!
+
+Here we will give you a vector of location names that Tommy needs to visit, and also some dependencies between those locations.
+
 For example, 
 
-Input: \
-location_names = ```{"Cardinal Gardens", "Coffee Bean1", "CVS"}```\
-dependencies = ```{{"Cardinal Gardens","Coffee Bean1"}, {"Cardinal Gardens","CVS"}, {"Coffee Bean1","CVS"}}```
+```shell
+Input: 
+location_names = {"Cardinal Gardens", "Coffee Bean1", "CVS"}
+dependencies = {{"Cardinal Gardens","Coffee Bean1"}, {"Cardinal Gardens","CVS"}, {"Coffee Bean1","CVS"}}
+```
 
 Here, ```{"Cardinal Gardens","Coffee Bean1"}``` means
-that Tommy must go to Cardinal Gardens prior to Coffee Bean1.
+that Tommy must go to `Cardinal Gardens` prior to `Coffee Bean1`.
 
-Output: 
-```Cardinal Gardens -> Coffee Bean1 -> CVS```
-Also, we provide ```PlotPointsOrder```function that could show the results on map. It will plot each location name and also some arrowed lines to demonstrate a feasible route.
+Your output should be:
+```shell
+Output: Cardinal Gardens -> Coffee Bean1 -> CVS
+```
+Also, we provide ```PlotPointsOrder``` function that can visualize the results on the map. It will plot each location name and also some arrowed lines to demonstrate a feasible route.
 
 ```shell
 6
@@ -391,7 +403,10 @@ Time taken by function: 43 microseconds
 ```
 <p align="center"><img src="img/TopologicalSort.png" alt="TSP" width="500"/></p>
 
-In the user interface, we read the locations and dependencies from topologicalsort_dependencies.csv and topologicalsort_locations.csv to modify your input there.
+In the user interface, we read the locations and dependencies from `topologicalsort_dependencies.csv` and `topologicalsort_locations.csv` to modify your input there.
+
+## Reporting Runtime:
+For each menu item, your program should show the time it took to finish each task.
 
 ## Report and Rubrics:
 
@@ -401,7 +416,7 @@ Your final project should be checked into Github. The README of your project is 
 
 Your README file should include two sections:
 
-1. High-level overview of your design (Use diagrams and pictures)
+1. High-level overview of your design (Use diagrams and pictures for your data structures).
 2. Detailed description of each function and its time complexity.
 3. Time spent for each function.
 4. Discussion, conclusion, and lessons learned.
@@ -431,7 +446,6 @@ Your README file should include two sections:
    1. [3-opt](http://cs.indstate.edu/~zeeshan/aman.pdf): 10 points.
    2. [Genetic algorithm](https://www.geeksforgeeks.org/traveling-salesman-problem-using-genetic-algorithm/) implementation for Travelling Trojan: 10 points
    3. Using dynamic and animated UI using ncurses: 10 points
-      - An example of ncurses
-      - uncomment line4 of main.cc
-      - Please develope your own one
+      - For an example of ncurses uncomment line4 of main.cc
+      - Please develope your own UI.
 
