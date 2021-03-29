@@ -5,7 +5,11 @@ cc_library(
     srcs = ["trojanmap.cc"],
     hdrs = ["trojanmap.h"],
     deps = ["@opencv//:opencv"],
-    data = ["map.csv", "input.jpg", "output.avi", "topologicalsort_locations.csv", "topologicalsort_dependencies.csv"],
+    data = ["map.csv", 
+    "input.jpg", 
+    "output.avi", 
+    "topologicalsort_locations.csv", 
+    "topologicalsort_dependencies.csv"],
     visibility = ["//visibility:public"],
 )
  

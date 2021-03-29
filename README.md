@@ -445,7 +445,7 @@ Your README file should include two sections:
 8. **Extra credit items**: Maximum of 20 points:
    1. [3-opt](http://cs.indstate.edu/~zeeshan/aman.pdf): 10 points.
    2. [Genetic algorithm](https://www.geeksforgeeks.org/traveling-salesman-problem-using-genetic-algorithm/) implementation for Travelling Trojan: 10 points
-   3. Using dynamic and animated UI using ncurses: 10 points
+   3. Using dynamic and animated UI using [ncurses](https://en.wikipedia.org/wiki/Ncurses): 10 points
       - For an example of ncurses uncomment line4 of main.cc
       - Please develope your own UI.
 
