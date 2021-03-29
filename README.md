@@ -377,9 +377,9 @@ that Tommy must go to Cardinal Gardens prior to Coffee Bean1.
 
 Output: 
 ```Cardinal Gardens -> Coffee Bean1 -> CVS```
-Also, we provide ```PlotPointsOrder```function that could show the results on map. It will plot each location name and also some arrowed lines to demonstrate a feasible route. If there are no feasible route, just return one empty vector.
+Also, we provide ```PlotPointsOrder```function that could show the results on map. It will plot each location name and also some arrowed lines to demonstrate a feasible route. If there is no feasible route, just return one empty vector.
 
-Hint: The locations are nodes, and the dependencies could be directed edge. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
+Hint: The locations are actually nodes, and the dependencies could be directed edges. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
 
 ```shell
 6
