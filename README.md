@@ -374,6 +374,7 @@ The TrojanEats app will have some instructions about these constraints. So, Tomm
 
 Here we will give you a vector of location names that Tommy needs to visit, and also some dependencies between those locations.
 
+
 For example, 
 
 ```shell
@@ -390,6 +391,10 @@ Your output should be:
 Output: Cardinal Gardens -> Coffee Bean1 -> CVS
 ```
 Also, we provide ```PlotPointsOrder``` function that can visualize the results on the map. It will plot each location name and also some arrowed lines to demonstrate a feasible route.
+
+If no feasible route exists, you could simply return an empty vector.
+
+Hint: The locations are actually nodes, and the dependencies could be directed edges. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
 
 ```shell
 6
