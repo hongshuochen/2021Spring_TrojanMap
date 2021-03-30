@@ -66,16 +66,16 @@ Next, type the following, but make sure that you set the **path_to_install_folde
 ```shell
 $ cd build
 $ cmake -D CMAKE_INSTALL_PREFIX=**path_to_install_folder**\
--D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
--D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON\
--D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF\
--D WITH_NVCUVID=ON\
--D WITH_CUDA=ON\
--D BUILD_DOCS=OFF\
--D BUILD_PERF_TESTS=OFF\
--D BUILD_TESTS=OFF\
--D WITH_CSTRIPES=ON\
--D WITH_OPENCL=ON ..
+ -D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
+ -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON\
+ -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF\
+ -D WITH_NVCUVID=ON\
+ -D WITH_CUDA=ON\
+ -D BUILD_DOCS=OFF\
+ -D BUILD_PERF_TESTS=OFF\
+ -D BUILD_TESTS=OFF\
+ -D WITH_CSTRIPES=ON\
+ -D WITH_OPENCL=ON ..
 $ make install
 ```
 
@@ -84,16 +84,16 @@ For example, if cloned this repo under "/Users/ari/github/TrojanMap", you should
 ```shell
 $ cd build
 $ cmake -D CMAKE_INSTALL_PREFIX=/Users/ari/github/TrojanMap/opencv/install\
--D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
--D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON\
--D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF\
--D WITH_NVCUVID=ON\
--D WITH_CUDA=ON\
--D BUILD_DOCS=OFF\
--D BUILD_PERF_TESTS=OFF\
--D BUILD_TESTS=OFF\
--D WITH_CSTRIPES=ON\
--D WITH_OPENCL=ON ..
+ -D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
+ -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON\
+ -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF\
+ -D WITH_NVCUVID=ON\
+ -D WITH_CUDA=ON\
+ -D BUILD_DOCS=OFF\
+ -D BUILD_PERF_TESTS=OFF\
+ -D BUILD_TESTS=OFF\
+ -D WITH_CSTRIPES=ON\
+ -D WITH_OPENCL=ON ..
 $ make install
 ```
 
@@ -451,6 +451,8 @@ Your README file should include two sections:
    1. [3-opt](http://cs.indstate.edu/~zeeshan/aman.pdf): 10 points.
    2. [Genetic algorithm](https://www.geeksforgeeks.org/traveling-salesman-problem-using-genetic-algorithm/) implementation for Travelling Trojan: 10 points
    3. Using dynamic and animated UI using [ncurses](https://en.wikipedia.org/wiki/Ncurses): 10 points
-      - For an example of ncurses uncomment line4 of main.cc
+      - You could check https://github.com/ourarash/ncurses_bazel
       - Please develope your own UI.
+      - example
+<p align="center"><img src="img/ncurses example.gif" alt="example" width="500"/></p>
 
