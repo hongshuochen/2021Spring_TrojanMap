@@ -1,5 +1,4 @@
 #include "trojanmap.h"
-
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
@@ -254,15 +253,19 @@ void TrojanMap::PrintMenu() {
     std::string dependencies_filename;
     getline(std::cin, dependencies_filename);
     
-    std::string default_locations_filename = "src/lib/topologicalsort_locations.csv";
-    std::string default_dependencies_filename = "src/lib/topologicalsort_dependencies.csv";
-    if (locations_filename == "")  locations_filename = default_locations_filename;
-    if (dependencies_filename == "") dependencies_filename = default_dependencies_filename;
-    
     // Read location names from CSV file
-    std::vector<std::string> location_names = ReadLocationsFromCSVFile(locations_filename);
+    std::vector<std::string> location_names;
+    if (locations_filename == "") 
+      location_names = {"Cardinal Gardens", "Coffee Bean1","CVS"};
+    else
+      location_names = ReadLocationsFromCSVFile(locations_filename);
+    
     // Read dependencies from CSV file
-    std::vector<std::vector<std::string>> dependencies = ReadDependenciesFromCSVFile(dependencies_filename);
+    std::vector<std::vector<std::string>> dependencies;
+    if (dependencies_filename == "")
+      dependencies = {{"Coffee Bean1","Cardinal Gardens"}, {"CVS","Cardinal Gardens"}, {"CVS","Coffee Bean1"}};
+    else
+      dependencies = ReadDependenciesFromCSVFile(dependencies_filename);
 
     // std::vector<std::string> location_names = {"Cardinal Gardens", "Coffee Bean1","CVS"};
     // std::vector<std::vector<std::string>> dependencies = {{"Coffee Bean1","Cardinal Gardens"}, {"CVS","Cardinal Gardens"}, {"CVS","Coffee Bean1"}};
