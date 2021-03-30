@@ -111,12 +111,7 @@ $ make install
 ## Run the program
 
 Please run:\
-For Ubuntu:
-```shell
-$ bazel run --cxxopt='-std=c++17'
-```
 
-For MacOS:
 ```shell
 $ bazel run src/main:main
 ```
@@ -473,4 +468,8 @@ Your README file should include two sections:
       - Please develope your own UI.
       - example
 <p align="center"><img src="img/ncurses example.gif" alt="example" width="500"/></p>
+   Note: For Ubuntu, you main need to use the following command to prevent errors.
+   ```shell
+   $ bazel run --cxxopt='-std=c++17' src/main:main
+   ```
 
