@@ -7,8 +7,8 @@ cc_library(
     deps = ["@opencv//:opencv"],
     data = ["map.csv", 
     "input.jpg", 
-    "output.avi", 
-    "topologicalsort_locations.csv", 
+    "output.avi",
+    "topologicalsort_locations.csv",
     "topologicalsort_dependencies.csv"],
     visibility = ["//visibility:public"],
 )

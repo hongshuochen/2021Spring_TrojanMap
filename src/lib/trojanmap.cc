@@ -244,10 +244,25 @@ void TrojanMap::PrintMenu() {
         "**************************************************************\n"
         "* 6. Topological Sort                                         \n"
         "**************************************************************\n";
+    std::cout << menu << std::endl;
+    menu = "Please input the locations filename:";
+    std::cout << menu;
+    std::string locations_filename;
+    getline(std::cin, locations_filename);
+    menu = "Please input the dependencies filename:";
+    std::cout << menu;
+    std::string dependencies_filename;
+    getline(std::cin, dependencies_filename);
+    
+    std::string default_locations_filename = "src/lib/topologicalsort_locations.csv";
+    std::string default_dependencies_filename = "src/lib/topologicalsort_dependencies.csv";
+    if (locations_filename == "")  locations_filename = default_locations_filename;
+    if (dependencies_filename == "") dependencies_filename = default_dependencies_filename;
+    
     // Read location names from CSV file
-    std::vector<std::string> location_names = ReadLocationsFromCSVFile("src/lib/topologicalsort_locations.csv");
+    std::vector<std::string> location_names = ReadLocationsFromCSVFile(locations_filename);
     // Read dependencies from CSV file
-    std::vector<std::vector<std::string>> dependencies = ReadDependenciesFromCSVFile("src/lib/topologicalsort_dependencies.csv");
+    std::vector<std::vector<std::string>> dependencies = ReadDependenciesFromCSVFile(dependencies_filename);
 
     // std::vector<std::string> location_names = {"Cardinal Gardens", "Coffee Bean1","CVS"};
     // std::vector<std::vector<std::string>> dependencies = {{"Coffee Bean1","Cardinal Gardens"}, {"CVS","Cardinal Gardens"}, {"CVS","Coffee Bean1"}};
@@ -652,6 +667,17 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Bellman_Ford(
  */
 std::vector<std::string> TrojanMap::ReadLocationsFromCSVFile(std::string locations_filename){
   std::vector<std::string> location_names_from_csv;
+  std::fstream fin;
+  fin.open(locations_filename, std::ios::in);
+  std::string line, word;
+  getline(fin, line);
+  while (getline(fin, line)) {
+    std::stringstream s(line);
+    while (getline(s, word, ',')) {
+      location_names_from_csv.push_back(word);
+    }
+  }
+  fin.close();
   return location_names_from_csv;
 }
 
@@ -664,6 +690,19 @@ std::vector<std::string> TrojanMap::ReadLocationsFromCSVFile(std::string locatio
  */
 std::vector<std::vector<std::string>> TrojanMap::ReadDependenciesFromCSVFile(std::string dependencies_filename){
   std::vector<std::vector<std::string>> dependencies_from_csv;
+  std::fstream fin;
+  fin.open(dependencies_filename, std::ios::in);
+  std::string line, word;
+  getline(fin, line);
+  while (getline(fin, line)) {
+    std::stringstream s(line);
+    std::vector<std::string> dependency;
+    while (getline(s, word, ',')) {
+      dependency.push_back(word);
+    }
+    dependencies_from_csv.push_back(dependency);
+  }
+  fin.close();
   return dependencies_from_csv;
 }
 
@@ -678,6 +717,49 @@ std::vector<std::vector<std::string>> TrojanMap::ReadDependenciesFromCSVFile(std
 std::vector<std::string> TrojanMap::DeliveringTrojan(std::vector<std::string> &locations,
                                                      std::vector<std::vector<std::string>> &dependencies){
   std::vector<std::string> result;
+
+  // Create the DAG.
+  std::unordered_map<std::string, std::vector<std::string>> adj; // Adjacency matrix.
+  std::unordered_map<std::string, int> indegree; // indegree array.
+
+  for (auto location:locations) {
+    std::vector<std::string> temp;
+    adj[location] = temp;
+    indegree[location] = 0;
+  }
+
+  for (auto dependency:dependencies){
+    // filling adjacency matrix for all the nodes of the graph.
+    adj[dependency[0]].push_back(dependency[1]);
+    // also filling indegree value for all nodes.
+    indegree[dependency[1]] += 1;
+  }
+  // Khan's algorithm
+  std::queue<std::string> q;
+  for (auto location : locations)
+  {
+    // will push all the nodes with the indegree 0 in the queue as we have completed all the prerequisites for it.
+    if (indegree[location] == 0)
+      q.push(location);
+  }
+  while (!q.empty())
+  {
+      // one by one we will take every element of the queue and will traverse the adjacency list of it 
+      // and will remove that node and will reduce the indegree of the adjacent nodes which are
+      // prerequisites for it.
+      std::string curr = q.front();
+      q.pop();
+
+      for (auto a : adj[curr])
+      {
+          indegree[a] -= 1;
+          // and will push the node having 0 indegree in the queue.
+          if (indegree[a] == 0)
+              q.push(a);
+      }
+      // and after processing current node, will push it in the ans.
+      result.push_back(curr);
+  }
   return result;                                                     
 }
 
