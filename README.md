@@ -463,12 +463,13 @@ Your README file should include two sections:
 8. **Extra credit items**: Maximum of 20 points:
    1. [3-opt](http://cs.indstate.edu/~zeeshan/aman.pdf): 10 points.
    2. [Genetic algorithm](https://www.geeksforgeeks.org/traveling-salesman-problem-using-genetic-algorithm/) implementation for Travelling Trojan: 10 points
-   3. Using dynamic and animated UI using [ncurses](https://en.wikipedia.org/wiki/Ncurses): 10 points
+   3. Create dynamic and animated UI using [ncurses](https://en.wikipedia.org/wiki/Ncurses): 10 points
       - You could check https://github.com/ourarash/ncurses_bazel
       - Please develope your own UI.
       - example
 <p align="center"><img src="img/ncurses example.gif" alt="example" width="500"/></p>
    Note: For Ubuntu, you main need to use the following command to prevent errors.
+   
    ```shell
    $ bazel run --cxxopt='-std=c++17' src/main:main
    ```
