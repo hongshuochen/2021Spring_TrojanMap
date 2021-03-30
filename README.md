@@ -110,7 +110,7 @@ $ make install
 
 ## Run the program
 
-Please run:\
+Please run:
 
 ```shell
 $ bazel run src/main:main
