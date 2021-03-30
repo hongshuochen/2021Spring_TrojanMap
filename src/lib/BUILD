@@ -7,16 +7,6 @@ cc_library(
     deps = ["@opencv//:opencv"],
     data = ["map.csv", 
     "input.jpg", 
-    "output.avi", 
-    "topologicalsort_locations.csv", 
-    "topologicalsort_dependencies.csv"],
-    visibility = ["//visibility:public"],
-)
- 
-cc_library(
-    name = "UI",
-    srcs = glob(["UI.cc"]),
-    hdrs = glob(["UI.h"]),
-    deps = ["@ncurses//:main"],
+    "output.avi"],
     visibility = ["//visibility:public"],
 )
