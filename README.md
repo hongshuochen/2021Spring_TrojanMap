@@ -42,8 +42,6 @@ Use the following commands to install OpenCV.
 ```shell
 $ cd TrojanMap
 $ git clone https://github.com/opencv/opencv.git
-$ cd opencv/
-$ mkdir build install
 ```
 
 ### Other library Installations
@@ -53,6 +51,7 @@ For Ubuntu:
 $ sudo apt-get install cmake libgtk2.0-dev pkg-config
 $ sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
 $ sudo apt-get install libncurses5-dev libncursesw5-dev
+$ cp ubuntu/* ./
 ```
 
 For MacOS:
@@ -64,6 +63,8 @@ $ brew install ncurses
 Next, type the following, but make sure that you set the **path_to_install_folder** to be the absolute path to the install folder under opencv.
 
 ```shell
+$ cd opencv/
+$ mkdir build install
 $ cd build
 $ cmake -D CMAKE_INSTALL_PREFIX=**path_to_install_folder**\
  -D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
@@ -82,6 +83,8 @@ $ make install
 For example, if cloned this repo under "/Users/ari/github/TrojanMap", you should type:
 
 ```shell
+$ cd opencv/
+$ mkdir build install
 $ cd build
 $ cmake -D CMAKE_INSTALL_PREFIX=/Users/ari/github/TrojanMap/opencv/install\
  -D BUILD_LIST=core,highgui,imgcodecs,imgproc,videoio\
@@ -101,8 +104,13 @@ $ make install
 
 ## Run the program
 
-Please run:
+Please run:\
+For Ubuntu:
+```shell
+$ bazel run --cxxopt='-std=c++17'
+```
 
+For MacOS:
 ```shell
 $ bazel run src/main:main
 ```
