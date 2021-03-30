@@ -245,43 +245,14 @@ void TrojanMap::PrintMenu() {
         "* 6. Topological Sort                                         \n"
         "**************************************************************\n";
     // Read location names from CSV file
-    // TODO: This should be in a separate function that takes 
-    // the filename from the user and returns the vector. 
-    // The students should write this function
-    std::vector<std::string> location_names_from_csv;
-    std::fstream fin;
-    fin.open("input/topologicalsort_locations.csv", std::ios::in);
-    std::string line, word;
-    getline(fin, line);
-    while (getline(fin, line)) {
-      std::stringstream s(line);
-      while (getline(s, word, ',')) {
-        location_names_from_csv.push_back(word);
-      }
-    }
-    fin.close();
-
+    std::vector<std::string> location_names = ReadLocationsFromCSVFile("src/lib/topologicalsort_locations.csv");
     // Read dependencies from CSV file
-    // TODO: This should be in a separate function that takes 
-    // the filename from the user and returns the vector.
-    // The students should write this function
-    std::vector<std::vector<std::string>> dependencies_from_csv;
-    fin.open("input/topologicalsort_dependencies.csv", std::ios::in);
-    getline(fin, line);
-    while (getline(fin, line)) {
-      std::stringstream s(line);
-      std::vector<std::string> dependency;
-      while (getline(s, word, ',')) {
-        dependency.push_back(word);
-      }
-      dependencies_from_csv.push_back(dependency);
-    }
-    fin.close();
+    std::vector<std::vector<std::string>> dependencies = ReadDependenciesFromCSVFile("src/lib/topologicalsort_dependencies.csv");
 
     // std::vector<std::string> location_names = {"Cardinal Gardens", "Coffee Bean1","CVS"};
     // std::vector<std::vector<std::string>> dependencies = {{"Coffee Bean1","Cardinal Gardens"}, {"CVS","Cardinal Gardens"}, {"CVS","Coffee Bean1"}};
     auto start = std::chrono::high_resolution_clock::now();
-    auto result = DeliveringTrojan(location_names_from_csv, dependencies_from_csv);
+    auto result = DeliveringTrojan(location_names, dependencies);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     menu = "*************************Results******************************";
@@ -673,8 +644,32 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Bellman_Ford(
 }
 
 /**
- * DeliveringTrojan: Given 2 locations, return the shortest path which is a
- * list of id.
+ * Given CSV filename, it read and parse locations data from CSV file,
+ * and return locations vector for topological sort problem.
+ *
+ * @param  {std::string} locations_filename     : locations_filename
+ * @return {std::vector<std::string>}           : locations 
+ */
+std::vector<std::string> TrojanMap::ReadLocationsFromCSVFile(std::string locations_filename){
+  std::vector<std::string> location_names_from_csv;
+  return location_names_from_csv;
+}
+
+/**
+ * Given CSV filenames, it read and parse dependencise data from CSV file,
+ * and return dependencies vector for topological sort problem.
+ *
+ * @param  {std::string} dependencies_filename     : dependencies_filename
+ * @return {std::vector<std::vector<std::string>>} : dependencies
+ */
+std::vector<std::vector<std::string>> TrojanMap::ReadDependenciesFromCSVFile(std::string dependencies_filename){
+  std::vector<std::vector<std::string>> dependencies_from_csv;
+  return dependencies_from_csv;
+}
+
+/**
+ * DeliveringTrojan: Given a vector of location names, it should return a sorting of nodes
+ * that satisfies the given dependencies.
  *
  * @param  {std::vector<std::string>} locations                     : locations
  * @param  {std::vector<std::vector<std::string>>} dependencies     : prerequisites
