@@ -394,7 +394,11 @@ Also, we provide ```PlotPointsOrder``` function that can visualize the results o
 
 If no feasible route exists, you could simply return an empty vector.
 
-Hint: The locations are actually nodes, and the dependencies could be directed edges. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
+Hint:
+- You also need to finish ```ReadLocationsFromCSVFile``` and ```ReadDependenciesFromCSVFile``` functions, so you could read and parse data from you own CSV files. We also give two sample CSV files under ```input``` folder, which could be a reference. 
+- When it asks you filenames, you need to give the absolute path.
+- If you do not have ```ReadLocationsFromCSVFile``` and ```ReadDependenciesFromCSVFile``` functions ready yet, you can just press enter when it asks you filenames. It will call the default locations and dependencies.
+- The locations are actually nodes, and the dependencies could be directed edges. You may want to first construct a DAG and then implement topological sort algorithm to get the route.
 
 ```shell
 6
