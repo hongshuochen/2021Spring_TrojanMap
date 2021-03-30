@@ -1,5 +1,11 @@
 # EE599 Final Project - Spring 2021 - TrojanMap
 
+## Deadline: 
+
+Video Presentation: Wednesday, April 28 by 23:59 pm
+
+Code submission: Friday, April 30 by 23:59 pm
+
 ## TrojanMap
 
 This project focuses on using data structures in C++ and implementing various graph algorithms to build a map application.
