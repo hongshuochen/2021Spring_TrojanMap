@@ -46,7 +46,7 @@ For visualization, we use OpenCV library. You will use this library as a black b
 Use the following commands to install OpenCV.
 
 ```shell
-$ cd TrojanMap
+$ cd 2021Spring_TrojanMap
 $ git clone https://github.com/opencv/opencv.git
 ```
 
